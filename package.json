@@ -9,7 +9,10 @@
   "author": "bsandon@uvm.edu",
   "license": "ISC",
   "dependencies": {
-    "@andyreagan/d3-shifterator": "^4.0.10",
+    "d3": "^7.9.0",
+    "@andyreagan/d3-shifterator": "^4.0.10"
+  },
+  "overrides": {
     "d3": "^7.9.0"
   }
 }
