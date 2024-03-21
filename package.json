@@ -1,0 +1,15 @@
+{
+  "name": "hypertext-sentiment-analysis",
+  "version": "1.0.0",
+  "description": "A Node.js project to sentiment analysis on the hypertext works ”Twelve Blue” by Michael Joyce, and “my body – a Wunderkammer” by Shelley Jackson and visualize the results. This project is created in conjunction with my final project for my MATH-6713: Complex Networks course at UVM.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bsandon@uvm.edu",
+  "license": "ISC",
+  "dependencies": {
+    "@andyreagan/d3-shifterator": "^4.0.10",
+    "d3": "^7.9.0"
+  }
+}
