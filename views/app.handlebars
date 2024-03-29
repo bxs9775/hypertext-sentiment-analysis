@@ -4,6 +4,7 @@
 <h2>Available corpora</h2>
 <ul>
     {{#each corpora}}
-    <li><i>&quot;{{this.fullName}}&quot;</i> by {{this.author}}</li>
+    
+    <li><a href={{append './corpora/' this.shortName}}><i>&quot;{{this.fullName}}&quot;</i> by {{this.author}}</a></li>
     {{/each}}
 </ul>

@@ -2,6 +2,8 @@
 const path = require('path');
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
+const helpers = require('handlebars-helpers')(['string']);
+
 
 const routers = require('./routers');
 
@@ -18,7 +20,10 @@ app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
 app.disable('x-powered-by');
 
 // handlebars
-const hbs = expressHandlebars.create({ defaultLayout: 'main' })
+const hbs = expressHandlebars.create({ 
+  defaultLayout: 'main',
+  helpers
+});
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
