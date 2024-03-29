@@ -1,1 +1,9 @@
-<p>Welcome to the main page.</p>
+<h1>Hypertext Power-Danger-Structure (PDS) Analysis Project</h1>
+<p>This project focuses on performing PDS sentiment analysis on various works of hypertext fiction.</p>
+
+<h2>Available corpora</h2>
+<ul>
+    {{#each corpora}}
+    <li><i>&quot;{{this.fullName}}&quot;</i> by {{this.author}}</li>
+    {{/each}}
+</ul>
