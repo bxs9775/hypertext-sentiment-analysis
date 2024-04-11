@@ -8,8 +8,7 @@ const router = express.Router();
 
 router.get('/', controllers.App.getIndex);
 for(let corpora of datasetInfo){
-    let corporaRouter = new AppCorporaRouter(corpora) 
-    console.log(`Creating router for corpora/${corpora.shortName}`)
+    let corporaRouter = new AppCorporaRouter(corpora)
     router.use(`/corpora/${corpora.shortName}`,corporaRouter.router);
 }
 
