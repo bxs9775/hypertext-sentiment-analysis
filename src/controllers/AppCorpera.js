@@ -19,7 +19,7 @@ class AppCorpera{
     getPathDetails(req, res){
         let pathId = req.params.id;
         let detailsData = FileIOHelper.getJsonFile(this.corpora.shortName,'details');
-        let textData = FileIOHelper.getJsonFile(this.corpora.shortName,'cleaned');
+        let textData = FileIOHelper.getJsonFile(this.corpora.shortName,'1grams');
         let path = detailsData.paths[pathId];
         let fullText = path.reduce((txt,page) => {
             txt[page] = textData[page]

@@ -2,7 +2,7 @@
 const path = require('path');
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
-const helpers = require('handlebars-helpers')(['string','number']);
+const helpers = require('handlebars-helpers')(['object','string','number']);
 
 
 const routers = require('./routers');
