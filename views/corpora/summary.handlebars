@@ -24,9 +24,13 @@ let graph = {{{graph}}};
   </defs>
 </svg>
 {{#if paths}}
-<ul>
+<ol>
   {{#each paths}}
-  <li>{{this}}</li>
+    <li>
+      {{#each this}}
+      <span class="passage">{{this}}</span>
+      {{/each}}
+    </li>
   {{/each}}
-</ul>
+</ol>
 {{/if}}

@@ -1,0 +1,7 @@
+.passage::after{
+    content: ' \2192 ';
+}
+
+.passage:last-child:after{
+    content: '';
+}
