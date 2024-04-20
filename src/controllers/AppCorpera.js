@@ -15,6 +15,17 @@ class AppCorpera{
             paths: detailsData.paths
         });
     }
+
+    getPathDetails(req, res){
+        let pathId = req.params.id;
+        let detailsData = FileIOHelper.getJsonFile(this.corpora.shortName,'details');
+        let path = detailsData.paths[pathId];
+        return res.render('corpora/path', {
+            "corpora": this.corpora,
+            pathId: pathId,
+            path: path
+        });
+    }
 } 
 
 module.exports = AppCorpera;

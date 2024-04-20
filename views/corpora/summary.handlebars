@@ -25,12 +25,12 @@ let graph = {{{graph}}};
 </svg>
 {{#if paths}}
 <ol>
-  {{#each paths}}
-    <li>
-      {{#each this}}
+  {{#each paths as |path|}}
+    <li> <a href={{append (append ../corpora.shortName (append '/path/' (toFixed @index))) }}>
+      {{#each path}}
       <span class="passage">{{this}}</span>
       {{/each}}
-    </li>
+    </a> </li>
   {{/each}}
 </ol>
 {{/if}}
