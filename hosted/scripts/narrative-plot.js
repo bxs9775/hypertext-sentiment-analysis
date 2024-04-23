@@ -10,68 +10,60 @@ let padding = {
     top: 6
 };
 
-let fullData = path.map(page => textData[page]).flat().join(' ');
-let dataset = [];
+function createNarrativePlot(dataset){
+    console.log("Creating plot");
+    let svg = d3.select('#narrative-plot')
+    .attr('width',width)
+    .attr('height',height);
+
+  let xScale = d3.scaleLinear()
+      .domain([0,dataset.length])
+      .range([padding.left,width]);
+  let yScale = d3.scaleLinear()
+      .domain([1,9])
+      .range([height-padding.bottom,padding.top]);
+
+  var line = d3.line()
+      .x((d) => xScale(d[0]))
+      .y((d) => yScale(d[1]));
+
+  svg.append('path')
+      .datum(dataset)
+      .attr('class','line')
+      .attr('d',line)
+      .attr('stroke','blue')
+      .attr('fill','none');
+  
+  var xAxis = d3.axisBottom(xScale)
+  var yAxis = d3.axisLeft(yScale)
+  
+  svg.append('g')
+      .attr('class', 'xaxis axis')
+      .attr('transform', `translate(0,${height-padding.bottom})`)
+      .call(xAxis);
+  
+  svg.append('g')
+      .attr('class', 'yaxis axis')
+      .attr('transform', `translate(${padding.left}, 0 )`)
+      .call(yAxis);
+
+  
+  let chartWidth = width - padding.left;
+  let chartHeight = height - padding.bottom;
+  let xCenter =  (chartWidth/2) + padding.left;
+  let yCenter = (chartHeight/2) + padding.bottom;
+  
+  var xLabel = svg.append('g').append('text')
+      .text('Word Number')
+      .attr('x',xCenter)
+      .attr('y',height);
+  var ylabel = svg.append('g').append('text')
+      .text('h_avg')
+      .attr('x',0)
+      .attr('y',yCenter);
+}
 
 window.onload = async () => {
-    let labMT = await $.getJSON(`${window.location.origin}/assets/labMT.json`);
-
-    fullData.split(' ').entries().forEach( datum => {
-        let i = labMT.findIndex(record => record['Word'] === String(datum[1]).toLowerCase())
-        if(i > -1){
-            dataset.push(labMT[i]['Happiness Score'])
-        }
-    });
-
-    console.log("Dataset:", dataset);
-
-    let svg = d3.select('#narrative-plot')
-      .attr('width',width)
-      .attr('height',height);
-
-    let xScale = d3.scaleLinear()
-        .domain([0,dataset.length])
-        .range([padding.left,width]);
-    let yScale = d3.scaleLinear()
-        .domain([1,9])
-        .range([height-padding.bottom,padding.top]);
-
-    var line = d3.line()
-        .x((d) => xScale(d[0]))
-        .y((d) => yScale(d[1]));
-
-    svg.append('path')
-        .datum(dataset.entries())
-        .attr('class','line')
-        .attr('d',line)
-        .attr('stroke','blue')
-        .attr('fill','none');
-    
-    var xAxis = d3.axisBottom(xScale)
-    var yAxis = d3.axisLeft(yScale)
-    
-    svg.append('g')
-        .attr('class', 'xaxis axis')
-        .attr('transform', `translate(0,${height-padding.bottom})`)
-        .call(xAxis);
-    
-    svg.append('g')
-        .attr('class', 'yaxis axis')
-        .attr('transform', `translate(${padding.left}, 0 )`)
-        .call(yAxis);
-
-    
-    let chartWidth = width - padding.left;
-    let chartHeight = height - padding.bottom;
-    let xCenter =  (chartWidth/2) + padding.left;
-    let yCenter = (chartHeight/2) + padding.bottom;
-    
-    var xLabel = svg.append('g').append('text')
-        .text('Word Number')
-        .attr('x',xCenter)
-        .attr('y',height);
-    var ylabel = svg.append('g').append('text')
-        .text('h_avg')
-        .attr('x',0)
-        .attr('y',yCenter);
+    console.log(textData)
+    createNarrativePlot(textData);
 }
