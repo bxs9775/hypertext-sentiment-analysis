@@ -1,23 +1,30 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-
 console.log("Running line graph script...")
-
-let radius = 5;
-let xOffText = 6;
-let repelStrength = -250;
 
 let width = window.innerWidth*.9;
 let height = 700;
 
 let padding = {
     left: 70,
-    bottom: 50
+    bottom: 50,
+    top: 6
 };
 
-let dataset = path.map(page => oneGrams[page]).flat()
-console.log("Dataset:", dataset);
+let fullData = path.map(page => textData[page]).flat().join(' ');
+let dataset = [];
 
-window.onload = () => {
+window.onload = async () => {
+    let labMT = await $.getJSON(`${window.location.origin}/assets/labMT.json`);
+
+    fullData.split(' ').entries().forEach( datum => {
+        let i = labMT.findIndex(record => record['Word'] === String(datum[1]).toLowerCase())
+        if(i > -1){
+            dataset.push(labMT[i]['Happiness Score'])
+        }
+    });
+
+    console.log("Dataset:", dataset);
+
     let svg = d3.select('#narrative-plot')
       .attr('width',width)
       .attr('height',height);
@@ -26,18 +33,19 @@ window.onload = () => {
         .domain([0,dataset.length])
         .range([padding.left,width]);
     let yScale = d3.scaleLinear()
-        .domain([1,7])
-        .range([height-padding.bottom,0]);
+        .domain([1,9])
+        .range([height-padding.bottom,padding.top]);
 
     var line = d3.line()
-        .x((d) => d[0])
-        .y((d) => d[1][1]);
-    
+        .x((d) => xScale(d[0]))
+        .y((d) => yScale(d[1]));
+
     svg.append('path')
         .datum(dataset.entries())
         .attr('class','line')
         .attr('d',line)
-        .attr('stroke','blue');
+        .attr('stroke','blue')
+        .attr('fill','none');
     
     var xAxis = d3.axisBottom(xScale)
     var yAxis = d3.axisLeft(yScale)
