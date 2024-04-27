@@ -64,6 +64,6 @@ function createNarrativePlot(dataset){
 }
 
 window.onload = async () => {
-    console.log(textData)
-    createNarrativePlot(textData);
+    console.log(emotionalArcData)
+    createNarrativePlot(emotionalArcData);
 }
