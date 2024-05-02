@@ -26,12 +26,16 @@ class AppCorpera{
         let emotionalArcData = this.ioHelper.getCorporaJsonFile(this.corpora.shortName,'emotionalArcs')[pathId];
 
         let path = detailsData.paths[pathId];
+        let max_word_count = detailsData.path_words_stats.max;
+        let mag_word_count = 10**Math.log10(max_word_count);
+        let max_x = Math.ceil(max_word_count/mag_word_count) * mag_word_count;
         
         return res.render('corpora/path', {
             "corpora": this.corpora,
             pathId: pathId,
             path: path,
-            emotionalArc: JSON.stringify(emotionalArcData)
+            emotionalArc: JSON.stringify(emotionalArcData),
+            max_x: max_x
         });
     }
 } 

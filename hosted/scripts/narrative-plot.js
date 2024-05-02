@@ -17,7 +17,7 @@ function createNarrativePlot(dataset){
     .attr('height',height);
 
   let xScale = d3.scaleLinear()
-      .domain([0,dataset.length])
+      .domain([0,max_x])
       .range([padding.left,width]);
   let yScale = d3.scaleLinear()
       .domain([1,9])
