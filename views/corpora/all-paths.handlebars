@@ -1,0 +1,21 @@
+<script type="module" src="/assets/scripts/multi-path-narrative-plot.js"></script>
+<script  type="application/javascript">
+let max_x = {{max_x}};
+</script>
+<script  type="application/javascript">
+let emotionalArcsData = {{{emotionalArcs}}};
+</script>
+<h1>Corpora - &quot;{{corpora.fullName}}&quot;</h1>
+<svg id="narrative-plot">
+</svg>
+{{#if paths}}
+<ol>
+  {{#each paths as |path|}}
+    <li> <a href={{append (append ../corpora.shortName (append '/path/' (toFixed @index))) }}>
+      {{#each path}}
+      <span class="passage">{{this}}</span>
+      {{/each}}
+    </a> </li>
+  {{/each}}
+</ol>
+{{/if}}

@@ -18,7 +18,7 @@ export class Plot{
     }
 }
 
-export function addLine(dataset,plot){
+export function addLine(dataset,plot,opacity=1.0){
     var line = d3.line()
       .x((d) => plot.xScale(d[0]))
       .y((d) => plot.yScale(d[1]));
@@ -28,6 +28,7 @@ export function addLine(dataset,plot){
         .attr('class','line')
         .attr('d',line)
         .attr('stroke','blue')
+        .attr('opacity',opacity)
         .attr('fill','none');
 }
 

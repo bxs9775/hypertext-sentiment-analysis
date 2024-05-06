@@ -19,6 +19,22 @@ class AppCorpera{
         });
     }
 
+    getPathsSummary(req, res){
+        let detailsData = this.ioHelper.getCorporaJsonFile(this.corpora.shortName,'details');
+        let emotionalArcData = this.ioHelper.getCorporaJsonFile(this.corpora.shortName,'emotionalArcs');
+
+        let max_word_count = detailsData.path_words_stats.max;
+        let mag_word_count = 10**Math.log10(max_word_count);
+        let max_x = Math.ceil(max_word_count/mag_word_count) * mag_word_count
+        
+        return res.render('corpora/all-paths', {
+            "corpora": this.corpora,
+            paths: detailsData.paths,
+            emotionalArcs: JSON.stringify(emotionalArcData),
+            max_x: max_x
+        });
+    }
+
     getPathDetails(req, res){
         let pathId = req.params.id;
 

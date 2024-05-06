@@ -9,6 +9,7 @@ class AppCorperaRouter{
         this.router = express.Router()
 
         this.router.get('/',this.controller.getIndex.bind(this.controller));
+        this.router.get('/path',this.controller.getPathsSummary.bind(this.controller))
         this.router.get('/path/:id',this.controller.getPathDetails.bind(this.controller))
     }
 }

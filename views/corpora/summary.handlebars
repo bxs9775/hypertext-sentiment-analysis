@@ -24,6 +24,8 @@ let graph = {{{graph}}};
   </defs>
 </svg>
 {{#if paths}}
+<p><em>Narrative paths</em></p>
+<p><a href={{append corpora.shortName "/path"}}>All paths emotional arc plot</a></p>
 <ol>
   {{#each paths as |path|}}
     <li> <a href={{append (append ../corpora.shortName (append '/path/' (toFixed @index))) }}>
