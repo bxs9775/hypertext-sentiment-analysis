@@ -37,31 +37,34 @@ export function createNarrativePlot(){
     let svg = d3.select('#narrative-plot')
     .attr('width',width)
     .attr('height',height);
+
+    // set scales & axes
     let xScale = d3.scaleLinear()
         .domain([0,max_x])
         .range([padding.left,width]);
     let yScale = d3.scaleLinear()
         .domain([1,9])
-        .range([height-padding.bottom,padding.top]);
-        
+        .range([height-padding.bottom,padding.top]); 
     var xAxis = d3.axisBottom(xScale);
     var yAxis = d3.axisLeft(yScale);
   
+    // render axes
     svg.append('g')
         .attr('class', 'xaxis axis')
         .attr('transform', `translate(0,${height-padding.bottom})`)
         .call(xAxis);
-
     svg.append('g')
         .attr('class', 'yaxis axis')
         .attr('transform', `translate(${padding.left}, 0 )`)
         .call(yAxis);
-  
+    
+    // set size parameters
     let chartWidth = width - padding.left;
     let chartHeight = height - padding.bottom;
     let xCenter =  (chartWidth/2) + padding.left;
     let yCenter = (chartHeight/2) + padding.bottom;
 
+    // render labels
     var xLabel = svg.append('g').append('text')
         .text('Word Number')
         .attr('x',xCenter)

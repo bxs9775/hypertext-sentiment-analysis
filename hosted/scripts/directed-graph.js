@@ -2,7 +2,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 console.log("Running directed graph script...")
 
-let radius = 5;
+let radius = 3;
 let xOffText = 6;
 let repelStrength = -250;
 
@@ -41,8 +41,8 @@ window.onload = () => {
       .data(dataset.connections)
       .enter()
       .append('line')
-        .attr('stroke','black')
-        .attr('marker-end','url(#arrow)')
+        .attr('stroke','darkgrey')
+        .attr('marker-start',`url(#arrow)`);
     
     var nodes = svg.selectAll('g')
       .data(dataset.nodes)
